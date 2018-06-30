@@ -1,6 +1,6 @@
 # ccraft
 
-The start of a minecraft clone written in plain C. My friend [Dan](https://github.com/danlshields) and I made it in a sort of "game jam" of about 12 hours.
+The start of a minecraft clone written in plain C. My friend [Dan](https://github.com/danlshields) and I made in 2013. It was made in a sort of "game jam" of about 12 hours.
 
 The project is very incomplete but the foundations of the voxel world work well and are much more effecient than the real game.
 
