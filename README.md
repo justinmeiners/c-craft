@@ -1,4 +1,4 @@
-# ccraft
+# c-craft
 
 The start of a minecraft clone written in plain C. My friend [Dan](https://github.com/danlshields) and I made in 2013. It was made in a sort of "game jam" of about 12 hours.
 

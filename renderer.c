@@ -29,13 +29,13 @@ static GLuint Renderer_Upload(Renderer_t* renderer, short w, short h, int rgba, 
 void Renderer_Init(Renderer_t* renderer)
 {
     tga_image image;
-    tga_read(&image, "textures/block_textures.tga");
+    tga_read(&image, "data/block_textures.tga");
     tga_swap_red_blue(&image);
     
     renderer->blockAtlas = Renderer_Upload(renderer, image.width, image.height, 0, image.image_data);
     
     tga_image image2;
-    tga_read(&image2, "textures/item_textures.tga");
+    tga_read(&image2, "data/item_textures.tga");
     tga_swap_red_blue(&image2);
     
     renderer->itemAtlas = Renderer_Upload(renderer, image2.width, image2.height, 1, image2.image_data);
