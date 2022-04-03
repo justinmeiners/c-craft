@@ -135,25 +135,28 @@ int main(int argc, char * argv[])
 {    
     if (SDL_Init(SDL_INIT_VIDEO) == -1)
     {
+        fprintf(stderr, "SDL init failed\n");
         return 1;
     }
     
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_RendererInfo rendererInfo;
     _width = 1024;
     _height = 768;
-    SDL_CreateWindowAndRenderer(_width, _height, SDL_WINDOW_OPENGL, &window, &renderer);
-    reshape(_width, _height);
-    
-    SDL_GetRendererInfo(renderer, &rendererInfo);
-    if ((rendererInfo.flags & SDL_RENDERER_ACCELERATED) == 0 ||
-        (rendererInfo.flags & SDL_RENDERER_TARGETTEXTURE) == 0)
+
+    SDL_Window* window = SDL_CreateWindow("ccraft", 0, 0, _width, _height, SDL_WINDOW_OPENGL);
+    if (!window)
     {
+        fprintf(stderr, "SDL create window error: %s\n", SDL_GetError());
         SDL_Quit();
-        return 1;
     }
-    
+    SDL_GLContext context = SDL_GL_CreateContext(window);
+    if (!context)
+    {
+        fprintf(stderr, "create context error\n");
+        SDL_Quit();
+    }
+
+    reshape(_width, _height);
+   
     SDL_GL_SetSwapInterval(1);
     
     Game_Init(&game);
@@ -224,8 +227,8 @@ int main(int argc, char * argv[])
         Game_Update(&game);
         
         SDL_SetRelativeMouseMode(game.state.mode == MODE_GAME);
+        SDL_GL_SwapWindow(window);
         Game_Render(&game);
-        SDL_RenderPresent(renderer);
         SDL_Delay(17);
     }
 
